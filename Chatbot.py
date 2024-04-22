@@ -53,7 +53,7 @@ def get_twitter(project_name_list):
     with engine.connect() as conn:
         if project_name_list and 'all' in project_name_list:
             # query_twitter = select(twitter_base_content.c.influencer_id).group_by(twitter_base_content.c.influencer_id)
-            project_name_list = ['cfd','yeehagame']
+            project_name_list = ['daliy_twitter']
             query_project_twitter = select(twitter_base_influencers.c.twitter_username).where(twitter_base_influencers.c.project_name_array.op('&&')(project_name_list))
 
             result = conn.execute(query_project_twitter)
@@ -92,8 +92,8 @@ with st.sidebar:
 
     project_options = st.multiselect(
     'Please select one or more project',
-    ['all','cfd','yeehagame'],
-    default=['yeehagame'],
+    ['all','daliy_twitter'],
+    default=['daliy_twitter'],
     key='selected_projects',
     on_change=get_all_twitter
     )
