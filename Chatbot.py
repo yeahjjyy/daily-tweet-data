@@ -267,7 +267,15 @@ def num_tokens_from_string(string: str, encoding_name: str) -> int:
     encoding = tiktoken.get_encoding(encoding_name)
     num_tokens = len(encoding.encode(string))
     return num_tokens
-
+def truncate_string(input_string):
+    # 检查字符串长度
+    if len(input_string) > 10000:
+        # 如果超过10000，则截取前10000个字符并加上...
+        return input_string[:10000] + '...'
+    else:
+        # 如果没有超过，返回原字符串
+        return input_string
+    
 st.title("💬 generate prompt")
 display_container = st.empty()
 display_container2 = st.empty()
@@ -279,7 +287,7 @@ if st.session_state.last_content:
     export_file_name = str(uuid.uuid4())+"_twitter.txt"
     with display_container:
         with st.container(height=500):
-            st.text(st.session_state.last_content)
+            st.text(truncate_string(st.session_state.last_content))
 
     with display_container2:
         st.download_button(
@@ -320,7 +328,7 @@ if prompt:
 
             with display_container:
                 with st.container(height=500):
-                    st.text(content)
+                    st.text(truncate_string(content))
             with display_container2:
                 if content:
                     st.download_button(
