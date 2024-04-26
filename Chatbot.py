@@ -92,7 +92,7 @@ with st.sidebar:
 
     project_options = st.multiselect(
     'Please select one or more project',
-    ['all','daliy_twitter'],
+    ['daliy_twitter'],
     default=['daliy_twitter'],
     key='selected_projects',
     on_change=get_all_twitter
